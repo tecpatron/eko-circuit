@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EkoCircuit</title>
+    <style>
+        body {
+            background-color: #4CAF50;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .logo-container {
+            margin-top: 20px;
+        }
+        .logo {
+            width: 150px;
+            cursor: pointer;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px auto;  /* auto para centrar horizontalmente */
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: block;  /* para que tome todo el ancho del margen auto */
+            width: 200px; /* ancho fijo para que se vea consistente */
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0077A1;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .description {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <a href="/"><img src="{% static 'img/EC.png' %}" alt="EkoCircuit Logo" class="logo"></a>
+    </div>
+
+    <div class="container">
+        <h1>Bienvenido a EkoCircuit</h1>
+        <p class="description">EkoCircuit es una plataforma para la gestión de residuos electrónicos. Nuestro objetivo es facilitar el reciclaje y la gestión responsable de los residuos.</p>
+
+        <button class="btn" onclick="window.location.href='/informacion'">Información adicional</button>
+        <button class="btn" onclick="window.location.href='/registro-usuario'">Crear cuenta</button>
+        <button class="btn" onclick="window.location.href='/inicio-sesion'">Iniciar Sesión</button>
+        <button class="btn" onclick="window.location.href='/encuesta'">Encuesta</button>
+    </div>
+
+    <div class="footer">
+        <p><strong>Creado por:</strong> BASTPAT</p>
+        <p><strong>Contacto:</strong> Próximamente.</p>
+        <p><strong>Usuarios registrados:</strong> {{ total_usuarios }}</p>
+        <p><strong>Visitas totales a la página:</strong> {{ visitas }}</p>
+    </div>
+</body>
+</html>

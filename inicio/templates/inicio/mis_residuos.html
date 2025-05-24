@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Residuos</title>
+    <style>
+        body {
+            background-color: #4CAF50;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            margin: 20px auto;
+            width: 80%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+        .btn-regresar {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-regresar:hover {
+            background-color: #0077A1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mis Residuos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo de Residuo</th>
+                <th>Estado</th>
+                <th>Foto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for residuo in residuos %}
+                <tr>
+                    <td>{{ residuo.tipo }}</td>
+                    <td>{{ residuo.estado }}</td>
+                    <td>
+                        {% if residuo.foto %}
+                            <img src="{{ residuo.foto.url }}" alt="Foto del residuo">
+                        {% else %}
+                            Sin foto
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No has registrado residuos aún.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn-regresar" onclick="window.location.href='{% url 'registrar_residuo' %}'">Registrar Otro Residuo</button>
+</body>
+</html>
+
+

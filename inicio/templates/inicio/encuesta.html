@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Encuesta de Seguimiento</title>
+    <style>
+        body {
+            background-color: #4CAF50;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .pregunta {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .opciones {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        label {
+            background-color: transparent; /* quitar fondo negro */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+            margin: 0 3px;
+            user-select: none;
+            transition: background-color 0.3s ease;
+            border: 1px solid white; /* para distinguir cada opción */
+        }
+        input[type="radio"]:checked + label {
+            background-color: #008CBA;
+            color: white;
+            border-color: #005f7f;
+        }
+        .btn-submit {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #0077A1;
+        }
+        .error {
+            background-color: #cc0000;
+            color: white;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Encuesta de seguimiento</h1>
+
+    <p style="font-size: 14px; font-style: italic; margin-bottom: 25px;">
+    Responde según tu opinión, escala:
+    <br>1 = Totalmente en desacuerdo,
+    <br>2 = En desacuerdo,
+    <br>3 = Ni de acuerdo ni en desacuerdo,
+    <br>4 = De acuerdo,
+    <br>5 = Totalmente de acuerdo
+    </p>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'encuesta' %}">
+        {% csrf_token %}
+
+        <div class="pregunta">
+            <p>1. Me preocupo por reciclar correctamente los residuos electrónicos que género</p>
+            <div class="opciones">
+                {% for i in "12345" %}
+                    <input type="radio" id="p1_{{ i }}" name="pregunta1" value="{{ i }}">
+                    <label for="p1_{{ i }}">{{ i }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="pregunta">
+            <p>2. Considero importante reducir el consumo de dispositivos electrónicos para proteger el
+medio ambiente.</p>
+            <div class="opciones">
+                {% for i in "12345" %}
+                    <input type="radio" id="p2_{{ i }}" name="pregunta2" value="{{ i }}">
+                    <label for="p2_{{ i }}">{{ i }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="pregunta">
+            <p>3. Estoy comprometido(a) a adoptar prácticas sostenibles para cuidar el entorno natural.</p>
+            <div class="opciones">
+                {% for i in "12345" %}
+                    <input type="radio" id="p3_{{ i }}" name="pregunta3" value="{{ i }}">
+                    <label for="p3_{{ i }}">{{ i }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="pregunta">
+            <p>4. Creo que cada persona tiene responsabilidad en la protección del medio ambiente.</p>
+            <div class="opciones">
+                {% for i in "12345" %}
+                    <input type="radio" id="p4_{{ i }}" name="pregunta4" value="{{ i }}">
+                    <label for="p4_{{ i }}">{{ i }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="pregunta">
+            <p>5. Me esfuerzo por informarme y educarme sobre el impacto ambiental de los residuos
+electrónicos</p>
+            <div class="opciones">
+                {% for i in "12345" %}
+                    <input type="radio" id="p5_{{ i }}" name="pregunta5" value="{{ i }}">
+                    <label for="p5_{{ i }}">{{ i }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Enviar encuesta</button>
+    </form>
+</body>
+</html>
+
+
